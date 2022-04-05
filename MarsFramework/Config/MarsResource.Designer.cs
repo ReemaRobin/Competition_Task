@@ -70,11 +70,20 @@ namespace MarsFramework.Config {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to your path.
+        ///   Looks up a localized string similar to J:\Internship\Competition_Task\MarsFramework\ExcelData\TestDataShareSkill.xlsx.
         /// </summary>
         internal static string ExcelPath {
             get {
                 return ResourceManager.GetString("ExcelPath", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to J:\Internship\Competition_Task\MarsFramework\WorkSample\Image.jpeg.
+        /// </summary>
+        internal static string Filepath {
+            get {
+                return ResourceManager.GetString("Filepath", resourceCulture);
             }
         }
         
@@ -88,7 +97,7 @@ namespace MarsFramework.Config {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to your path.
+        ///   Looks up a localized string similar to J:\Internship\Competition_Task\MarsFramework\TestReports.
         /// </summary>
         internal static string ReportPath {
             get {
@@ -97,7 +106,7 @@ namespace MarsFramework.Config {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to your path.
+        ///   Looks up a localized string similar to J:\Internship\Competition_Task\MarsFramework\Config.
         /// </summary>
         internal static string ReportXMLPath {
             get {
@@ -106,7 +115,7 @@ namespace MarsFramework.Config {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to your path.
+        ///   Looks up a localized string similar to J:\Internship\Competition_Task\MarsFramework\TestReports\Screenshots.
         /// </summary>
         internal static string ScreenShotPath {
             get {

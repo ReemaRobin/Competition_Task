@@ -6,6 +6,7 @@ namespace MarsFramework.Pages
 {
     class SignUp
     {
+        [System.Obsolete]
         public SignUp()
         {
             PageFactory.InitElements(Global.GlobalDefinitions.driver, this);

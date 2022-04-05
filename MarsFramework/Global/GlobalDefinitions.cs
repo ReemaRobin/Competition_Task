@@ -1,4 +1,4 @@
-﻿using Excel;
+﻿using ExcelDataReader;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.UI;
 using System;
@@ -22,6 +22,8 @@ namespace MarsFramework.Global
             driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(time);
 
         }
+
+        [Obsolete]
         public static IWebElement WaitForElement(IWebDriver driver, By by, int timeOutinSeconds)
         {
             WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(timeOutinSeconds));
@@ -48,32 +50,32 @@ namespace MarsFramework.Global
                 dataCol.Clear();
             }
 
-
-            private static DataTable ExcelToDataTable(string fileName, string SheetName)
+            //trial
+            private static DataTable ExcelToDataTable(string fileName, string sheetName)
             {
                 // Open file and return as Stream
-                using (System.IO.FileStream stream = File.Open(fileName, FileMode.Open, FileAccess.Read))
+                using (var stream = File.Open(fileName, FileMode.Open, FileAccess.Read))
                 {
-                    using (IExcelDataReader excelReader = ExcelReaderFactory.CreateOpenXmlReader(stream))
+                    using (var reader = ExcelReaderFactory.CreateReader(stream))
                     {
-                        excelReader.IsFirstRowAsColumnNames = true;
 
-                        //Return as dataset
-                        DataSet result = excelReader.AsDataSet();
+                        var result = reader.AsDataSet(new ExcelDataSetConfiguration()
+                        {
+                            ConfigureDataTable = (data) => new ExcelDataTableConfiguration()
+                            {
+                                UseHeaderRow = true
+                            }
+                        });
                         //Get all the tables
-                        DataTableCollection table = result.Tables;
+                        var table = result.Tables;
 
                         // store it in data table
-                        DataTable resultTable = table[SheetName];
-
-                        //excelReader.Dispose();
-                        //excelReader.Close();
-                        // return
+                        var resultTable = table[sheetName];
                         return resultTable;
                     }
                 }
             }
-
+            
             public static string ReadData(int rowNumber, string columnName)
             {
                 try
@@ -83,7 +85,7 @@ namespace MarsFramework.Global
                     rowNumber = rowNumber - 1;
                     string data = (from colData in dataCol
                                    where colData.colName == columnName && colData.rowNumber == rowNumber
-                                   select colData.colValue).SingleOrDefault();
+                                   select colData.colValue).FirstOrDefault();
 
                     //var datas = dataCol.Where(x => x.colName == columnName && x.rowNumber == rowNumber).SingleOrDefault().colValue;
 

@@ -7,6 +7,8 @@ using RelevantCodes.ExtentReports;
 using System;
 using static MarsFramework.Global.GlobalDefinitions;
 
+
+
 namespace MarsFramework.Global
 {
     class Base
@@ -15,8 +17,9 @@ namespace MarsFramework.Global
 
         public static int Browser = Int32.Parse(MarsResource.Browser);
         public static String ExcelPath = MarsResource.ExcelPath;
-        public static string ScreenshotPath = MarsResource.ScreenShotPath;
-        public static string ReportPath = MarsResource.ReportPath;
+        public static String ScreenshotPath = MarsResource.ScreenShotPath;
+        public static String ReportPath = MarsResource.ReportPath;
+        public static String Filepath = MarsResource.Filepath;
         #endregion
 
         #region reports
@@ -68,16 +71,17 @@ namespace MarsFramework.Global
         {
             // Screenshot
             String img = SaveScreenShotClass.SaveScreenshot(GlobalDefinitions.driver, "Report");//AddScreenCapture(@"E:\Dropbox\VisualStudio\Projects\Beehive\TestReports\ScreenShots\");
+            test = new ExtentTest("", "");
             test.Log(LogStatus.Info, "Image example: " + img);
             // end test. (Reports)
-            extent.EndTest(test);
+            //extent.EndTest(test);
             // calling Flush writes everything to the log file (Reports)
             extent.Flush();
-            // Close the driver :)            
+            // Close the driver :)
+
             GlobalDefinitions.driver.Close();
             GlobalDefinitions.driver.Quit();
         }
         #endregion
-
     }
 }

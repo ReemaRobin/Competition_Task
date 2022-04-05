@@ -5,7 +5,7 @@ namespace MarsFramework
 {
     internal class Profile
     {
-
+        [System.Obsolete]
         public Profile()
         {
             PageFactory.InitElements(Global.GlobalDefinitions.driver, this);
